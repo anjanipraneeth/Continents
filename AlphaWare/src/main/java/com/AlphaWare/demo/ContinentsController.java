@@ -18,12 +18,8 @@ public class ContinentsController {
 	    }
 	    @PostMapping("/save")
 	    public String saveData(@RequestBody ContinentDTO[] continentDTOs) {
-	        try {
-	            continentsService.saveData(continentDTOs);
-	            return "Data saved successfully.";
-	        } catch (Exception e) {
-	            // Handle exceptions that occur during saving
-	            throw new NoDataFoundException("Error saving data: ");
-	        }
+	        continentsService.saveData(continentDTOs);
+	        return "Data saved successfully.";
 	    }
+
 }

@@ -39,19 +39,26 @@ public class ContinentsService {
 	    
 	    public void saveData(ContinentDTO[] dtos) {
 	        if (dtos != null) {
-	            for (ContinentDTO dto : dtos) {
-	                Continent continent = new Continent();
-	                continent.setCode(dto.getCode());
-	                continent.setName(dto.getName());
-	                continent.setAreaSqKm(dto.getAreaSqKm());
-	                continent.setPopulation(dto.getPopulation());
-	                continent.setLines(dto.getLines());
-	                continent.setCountries(dto.getCountries());
-	                continent.setOceans(dto.getOceans());
-	                continent.setDevelopedCountries(dto.getDevelopedCountries());
+	            try {
+	                for (ContinentDTO dto : dtos) {
+	                    Continent continent = new Continent();
+	                    continent.setCode(dto.getCode());
+	                    continent.setName(dto.getName());
+	                    continent.setAreaSqKm(dto.getAreaSqKm());
+	                    continent.setPopulation(dto.getPopulation());
+	                    continent.setLines(dto.getLines());
+	                    continent.setCountries(dto.getCountries());
+	                    continent.setOceans(dto.getOceans());
+	                    continent.setDevelopedCountries(dto.getDevelopedCountries());
 
-	                continentRepository.save(continent);
+	                    continentRepository.save(continent);
+	                }
+	            } catch (Exception e) {
+	                // Handle the exception, such as logging or rethrowing it as a custom exception
+	                throw new   NoDataFoundException("Error saving continent data: ");
 	            }
+	        } else {
+	            throw new NoDataFoundException("Input DTO array is null or empty.");
 	        }
 	    }
 }
